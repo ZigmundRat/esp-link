@@ -163,7 +163,6 @@ else ifeq ("$(FLASH_SIZE)","2MB")
 ESP_SPI_SIZE        ?= 4       # 6->4MB (1MB+1MB) or 4->4MB (512KB+512KB)
 ESP_FLASH_MODE      ?= 0       # 0->QIO, 2->DIO
 ESP_FLASH_FREQ_DIV  ?= 15      # 15->80Mhz
-:q
 ET_FS               ?= 16m     # 16Mbit flash size in esptool flash command
 ET_FF               ?= 80m     # 80Mhz flash speed in esptool flash command
 ET_BLANK            ?= 0x1FE000 # where to flash blank.bin to erase wireless settings
@@ -191,7 +190,7 @@ TRAVIS_BRANCH?=$(shell git symbolic-ref --short HEAD --quiet)
 # Use git describe to get the latest version tag, commits since then, sha and dirty flag, this
 # results is something like "v1.2.0-13-ab6cedf-dirty"
 NO_TAG ?= "no-tag"
-VERSION := $(shell (git describe --tags --match 'v*.0' --long --dirty || echo $(NO_TAG)) | sed -re 's/(\.0)?-/./')
+VERSION := $(shell (git describe --tags --match 'v*.*.*' --long --dirty || echo $(NO_TAG)) | sed -re 's/(\.0)?-/./')
 # If not on master then insert the branch name
 ifneq ($(TRAVIS_BRANCH),master)
 ifneq ($(findstring V%,$(TRAVIS_BRANCH)),)
